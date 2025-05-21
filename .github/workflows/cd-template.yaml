@@ -77,8 +77,8 @@ jobs:
           -chdir="${{inputs.root_module_folder_relative_path}}" `
           init `
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" `
-          -backend-config="container_name=${{inputs.backend_azure_storage_account_container_name}}" `
-          -backend-config="key=terraform.tfstate"
+          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" `
+          -backend-config="key=${{inputs.root_module_folder_relative_path}}.tfstate"
 
       - name: Terraform Plan for ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         shell: pwsh
@@ -177,8 +177,8 @@ jobs:
           -chdir="${{inputs.root_module_folder_relative_path}}" `
           init `
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" `
-          -backend-config="container_name=${{inputs.backend_azure_storage_account_container_name}}" `
-          -backend-config="key=terraform.tfstate"
+          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" `
+          -backend-config="key=${{inputs.root_module_folder_relative_path}}.tfstate"
 
       - name: Terraform ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         shell: pwsh
