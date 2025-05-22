@@ -73,11 +73,11 @@ jobs:
         shell: pwsh
         run: |
           terraform `
-          -chdir="${{inputs.root_module_folder_relative_path}}" `
+          -chdir="${{ inputs.root_module_folder_relative_path }}" `
           init `
-          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" `
-          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" `
-          -backend-config="key=${{inputs.root_module_folder_relative_path}}.tfstate"
+          -backend-config="storage_account_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME }}" `
+          -backend-config="container_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME }}" `
+          -backend-config="key=${{ inputs.root_module_folder_relative_path }}.tfstate"
 
       - name: Terraform Plan
         shell: pwsh
@@ -116,7 +116,7 @@ jobs:
       - name: Terraform Plan Summary
         shell: pwsh
         run: |
-          terraform -chdir="${{inputs.root_module_folder_relative_path}}" show -json tfplan > tfplan.json
+          terraform -chdir="${{ inputs.root_module_folder_relative_path }}" show -json tfplan > tfplan.json
           $planJson = Get-Content -Raw tfplan.json
           $planObject = ConvertFrom-Json $planJson -Depth 100
 
