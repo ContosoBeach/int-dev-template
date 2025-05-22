@@ -74,11 +74,11 @@ jobs:
         shell: pwsh
         run: |
           terraform `
-          -chdir="${{inputs.root_module_folder_relative_path}}" `
+          -chdir="${{ inputs.root_module_folder_relative_path }}" `
           init `
-          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" `
-          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" `
-          -backend-config="key=${{inputs.root_module_folder_relative_path}}.tfstate"
+          -backend-config="storage_account_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME }}" `
+          -backend-config="container_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME }}" `
+          -backend-config="key=${{ inputs.root_module_folder_relative_path }}.tfstate"
 
       - name: Terraform Plan for ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         shell: pwsh
@@ -118,7 +118,7 @@ jobs:
         shell: pwsh
         run: |
           $stagingDirectory = "staging"
-          $rootModuleFolder = "${{inputs.root_module_folder_relative_path}}"
+          $rootModuleFolder = "${{ inputs.root_module_folder_relative_path }}"
           New-Item -Path . -Name $stagingDirectory -ItemType "directory"
           Copy-Item -Path "./*" -Exclude @(".git", ".terraform", ".github",  $stagingDirectory) -Recurse -Destination "./$stagingDirectory"
 
@@ -137,7 +137,7 @@ jobs:
         shell: pwsh
         run: |
           terraform `
-          -chdir="${{inputs.root_module_folder_relative_path}}" `
+          -chdir="${{ inputs.root_module_folder_relative_path }}" `
           show `
           tfplan
 
@@ -174,17 +174,17 @@ jobs:
         shell: pwsh
         run: |
           terraform `
-          -chdir="${{inputs.root_module_folder_relative_path}}" `
+          -chdir="${{ inputs.root_module_folder_relative_path }}" `
           init `
-          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" `
-          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" `
-          -backend-config="key=${{inputs.root_module_folder_relative_path}}.tfstate"
+          -backend-config="storage_account_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME }}" `
+          -backend-config="container_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME }}" `
+          -backend-config="key=${{ inputs.root_module_folder_relative_path }}.tfstate"
 
       - name: Terraform ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         shell: pwsh
         run: |
           terraform `
-          -chdir="${{inputs.root_module_folder_relative_path}}" `
+          -chdir="${{ inputs.root_module_folder_relative_path }}" `
           apply `
           -input=false `
           -auto-approve `
